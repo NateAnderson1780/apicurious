@@ -40,6 +40,9 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'database_cleaner'
   gem 'simplecov', require: false
+end
+
+group :test do
   gem 'vcr'
   gem 'webmock'
 end

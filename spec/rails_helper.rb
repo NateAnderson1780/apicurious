@@ -7,12 +7,47 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'vcr'
 
-VCR.configure do |config|
-  config.cassette_library_dir = "spec/vcr_cassettes"
-  config.hook_into :webmock
-end
 # Add additional requires below this line. Rails is not loaded until this point!
+# VCR.configure do |config|
+#   config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
+#   config.hook_into :webmock
+# end
 
+require 'capybara/rails'
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
+
+
+def stub_omniauth
+  # first, set OmniAuth to run in test mode
+  OmniAuth.config.test_mode = true
+  # then, provide a set of fake oauth data that
+  # omniauth will use when a user tries to authenticate:
+  OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
+    provider: 'twitter',
+    uid: '123456',
+    extra: {
+      raw_info: {
+        login: "nateanderson",
+        name: "Nate"
+      }
+    },
+    credentials: {
+      token: ENV['github_token']
+    }
+  })
+end
+
+def login_in_user
+  visit root_path
+  stub_omniauth
+  click_on "Sign in with Github"
+end
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -26,7 +61,7 @@ end
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-# Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 # Checks for pending migration and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
@@ -39,7 +74,7 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and

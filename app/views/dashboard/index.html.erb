@@ -1,0 +1,26 @@
+<% if current_user %>
+  <h1>Profile Pic:</h1>
+    <div class="profile_pic">
+      <%= image_tag(@public_info.avatar_url) %>
+    </div>
+  <h1>Followers:</h1>
+  <div class="followers"> <%= @public_info.followers %></div>
+  <h1>Following:</h1>
+  <div class="following"> <%= @public_info.following %></div>
+  <h1>Number of Starred Repos:</h1>
+  <div class="starred_repo_count"> <%= @public_info.starred_repo_count %></div>
+<% end %>
+
+
+<!-- class RepoController
+  def index
+    @repos = Repo.get_all(current_user.token)
+  end
+end
+
+class Repo
+  def self.get_all(token)
+    GithubService.get_repos(token).map do |raw_repo|
+      Repo.new(raw_repo)
+    end
+  end -->

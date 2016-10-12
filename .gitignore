@@ -22,6 +22,6 @@
 # Ignore SimpleCov files
 coverage
 
-# Ignore vcr cassettes
-/spec/vcr_cassettes
+# Ignore VCR cassettes
+/spec/fixtures/vcr_cassettes/*
 
