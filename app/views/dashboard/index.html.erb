@@ -1,4 +1,7 @@
 <% if current_user %>
+  </br></br><%= link_to "Repositories", repositories_path %></br>
+            <%= link_to "Organizations", organizations_path %></br>
+            <%= link_to "Recent Activity", recent_activities_path %></br>
   <h1>Profile Pic:</h1>
     <div class="profile_pic">
       <%= image_tag(@public_info.avatar_url) %>

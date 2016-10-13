@@ -1,24 +1,38 @@
 class GithubService
-  def find_repos(user)
-    Faraday.get()
-  end
-  
-  def find_by_id(uid)
-    
-  end
-  
-  def followers
-    
-  end
-  
   def self.public_info(token)
     response = Faraday.get("https://api.github.com/user?access_token=#{token}")
     JSON.parse(response.body, symbolize_names: true)
   end
+  
+  def self.find_repos(token)
+    response = Faraday.get("https://api.github.com/user/repos?access_token=#{token}")
+    JSON.parse(response.body, symbolize_names: true)
+  end
+  
+  def self.find_organizations(token)
+    response = Faraday.get("https://api.github.com/user/orgs?access_token=#{token}")
+    JSON.parse(response.body, symbolize_names: true)
+  end
+  
+  def self.find_recent_activities(token)
+    
+  end
+end
+  # def self.recent_activity(token)
+  #   response = Faraday.get("https://api.github.com/feeds?access_token=#{token}")
+  #   JSON.parse(response.body, symbolize_names: true)
+  # end
+  # 
+  # def find_by_id(uid)
+  #   
+  # end
+  # 
+  # def followers
+  #   
+  # end
   
   # expect(repo.class).to eq(Hash)
   
   # def self.get_public_info(token)
   #   GithubService.public_info(token)
   # end
-end
