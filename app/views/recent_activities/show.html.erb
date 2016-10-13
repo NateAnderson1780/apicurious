@@ -1,0 +1,10 @@
+<h1>Followers Recent Activity:</h1>
+
+
+<div class="recent_activity">
+  <% @followers_recent_activities.each do |follower_recent_activity| %>
+    Name: <%= follower_recent_activity.name %></br>
+    Email: <%= follower_recent_activity.email %></br>
+    Message: <%= follower_recent_activity.message %></br></br>
+  <% end %>
+</div>

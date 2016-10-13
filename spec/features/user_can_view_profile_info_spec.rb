@@ -3,16 +3,16 @@ require 'rails_helper'
 describe "User Views Profile" do
   it "can see their profile info" do
     visit root_path
-    expect(page).to_not have_content("Bio")
+    expect(page).to_not have_content("Profile Pic")
     login_in_user
-    expect(page).to have_content("Bio")
+    expect(page).to have_content("Profile Pic")
 
-    within(".bio") do
-      expect(page).to have_content("nathanielanderson25@gmail.com")
+    within(".followers") do
+      expect(page).to have_content(0)
     end
     
-    within(".public-repos") do
-      expect(page).to have_content(30)
+    within(".following") do
+      expect(page).to have_content(0)
     end
   end
 end

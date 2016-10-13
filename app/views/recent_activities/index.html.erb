@@ -1,0 +1,11 @@
+</br></br><%= link_to "Follower Recent Activity", recent_activities_followers_path %></br>
+<h1>Your Recent Activity:</h1></br></br>
+
+
+<div class="recent_activity">
+  <% @recent_activities.each do |recent_activity| %>
+    Name: <%= recent_activity.name %></br>
+    Email: <%= recent_activity.email %></br>
+    Message: <%= recent_activity.message %></br></br>
+  <% end %>
+</div>

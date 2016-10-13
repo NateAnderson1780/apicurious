@@ -4,6 +4,11 @@ class GithubService
     JSON.parse(response.body, symbolize_names: true)
   end
   
+  def self.starred_repos(token, username)
+    response = Faraday.get("https://api.github.com/users/#{username}/starred?access_token=#{token}")
+    JSON.parse(response.body, symbolize_names: true)
+  end
+  
   def self.find_repos(token)
     response = Faraday.get("https://api.github.com/user/repos?access_token=#{token}")
     JSON.parse(response.body, symbolize_names: true)
@@ -16,6 +21,11 @@ class GithubService
   
   def self.find_recent_activities(token, username)
     response = Faraday.get("https://api.github.com/users/#{username}/events?access_token=#{token}")
+    JSON.parse(response.body, symbolize_names: true)
+  end
+  
+  def self.find_follower_recent_activities(token, username)
+    response = Faraday.get("https://api.github.com/users/#{username}/received_events?access_token=#{token}")
     JSON.parse(response.body, symbolize_names: true)
   end
 end

@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   get '/repositories', to: "repositories#index"
   get '/organizations', to: "organizations#index"
   get '/recent_activities', to: "recent_activities#index"
+  get '/recent_activities/followers', to: "recent_activities#show"
 end
