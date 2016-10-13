@@ -14,8 +14,9 @@ class GithubService
     JSON.parse(response.body, symbolize_names: true)
   end
   
-  def self.find_recent_activities(token)
-    
+  def self.find_recent_activities(token, username)
+    response = Faraday.get("https://api.github.com/users/#{username}/events?access_token=#{token}")
+    JSON.parse(response.body, symbolize_names: true)
   end
 end
   # def self.recent_activity(token)
