@@ -8,3 +8,5 @@ class User < ApplicationRecord
     end
   end
 end
+
+# make sure auth info assigns
